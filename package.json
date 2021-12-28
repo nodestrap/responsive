@@ -1,0 +1,33 @@
+{
+  "name": "@nodestrap/responsive",
+  "version": "4.0.0",
+  "description": "A responsive management system for web components.",
+  "type": "module",
+  "main": "dist/responsive.js",
+  "types": "dist/responsive.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodestrap/responsive.git"
+  },
+  "keywords": [
+    "responsive",
+    "design",
+    "layouts"
+  ],
+  "author": "heymarco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nodestrap/responsive/issues"
+  },
+  "homepage": "https://github.com/nodestrap/responsive#readme",
+  "dependencies": {
+    "@nodestrap/dimensions": "^4.0.1",
+    "@nodestrap/hooks": "^4.0.0",
+    "@nodestrap/utilities": "^4.0.2",
+    "@types/react": "^17.0.38",
+    "react": "^17.0.2"
+  }
+}
