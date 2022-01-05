@@ -25,9 +25,25 @@ export const useResponsiveCurrentFallback = () => {
 const someOverflowedDescendant = (maxRight, maxBottom, parent) => {
     if (Array.from(parent.children).some((child) => {
         const { right: childRight, bottom: childBottom } = child.getBoundingClientRect();
-        if (((maxRight !== null) && ((childRight - maxRight) > -0.6))
+        if (((maxRight !== null)
+            &&
+                (childRight !== maxRight)
+            &&
+                ((Number.isInteger(childRight) && Number.isInteger(maxRight))
+                    ?
+                        (childRight > maxRight)
+                    :
+                        ((childRight - maxRight) > -0.6)))
             ||
-                ((maxBottom !== null) && ((childBottom - maxBottom) > -0.6)))
+                ((maxBottom !== null)
+                    &&
+                        (childBottom !== maxBottom)
+                    &&
+                        ((Number.isInteger(childBottom) && Number.isInteger(maxBottom))
+                            ?
+                                (childBottom > maxBottom)
+                            :
+                                ((childBottom - maxBottom) > -0.6))))
             return true; // found
         return someOverflowedDescendant(maxRight, maxBottom, child); // nested search
     }))
