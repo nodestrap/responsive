@@ -1,6 +1,6 @@
 {
   "name": "@nodestrap/responsive",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "A responsive management system for web components.",
   "type": "module",
   "main": "dist/responsive.js",
@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/nodestrap/responsive#readme",
   "dependencies": {
-    "@nodestrap/dimensions": "^4.0.2",
-    "@nodestrap/hooks": "^4.0.0",
-    "@nodestrap/utilities": "^4.0.2",
+    "@nodestrap/dimensions": "^4.0.3",
+    "@nodestrap/hooks": "^4.0.1",
+    "@nodestrap/utilities": "^4.0.3",
     "@types/react": "^17.0.38",
     "react": "^17.0.2"
   }
