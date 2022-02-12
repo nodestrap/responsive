@@ -222,7 +222,7 @@ export function ResponsiveProvider<TFallback>(props: ResponsiveProviderProps<TFa
             return someOverflowedDescendant(maxRight, maxBottom, elm);
         });
         if (hasOverflowed) setCurrentFallbackIndex(currentFallbackIndex + 1);
-    }, [currentFallbackIndex, maxFallbackIndex, ...sizes]);
+    }); // run on every render & DOM has been updated
     
     
     

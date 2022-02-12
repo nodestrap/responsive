@@ -127,7 +127,7 @@ export function ResponsiveProvider(props) {
         });
         if (hasOverflowed)
             setCurrentFallbackIndex(currentFallbackIndex + 1);
-    }, [currentFallbackIndex, maxFallbackIndex, ...sizes]);
+    }); // run on every render & DOM has been updated
     // jsx:
     return (React.createElement(Context.Provider, { value: { currentFallback } }, childrenWithSizes.map((childWithSize) => childWithSize.child)));
 }
