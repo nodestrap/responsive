@@ -24,26 +24,16 @@ export const useResponsiveCurrentFallback = () => {
 // utilities:
 const someOverflowedDescendant = (maxRight, maxBottom, parent) => {
     if (Array.from(parent.children).some((child) => {
-        const { right: childRight, bottom: childBottom } = child.getBoundingClientRect();
+        let { right: childRight, bottom: childBottom } = child.getBoundingClientRect();
+        childRight = Math.round(childRight);
+        childBottom = Math.round(childBottom);
         if (((maxRight !== null)
             &&
-                (childRight !== maxRight)
-            &&
-                ((Number.isInteger(childRight) && Number.isInteger(maxRight))
-                    ?
-                        (childRight > maxRight)
-                    :
-                        ((childRight - maxRight) > -0.6)))
+                (childRight > maxRight))
             ||
                 ((maxBottom !== null)
                     &&
-                        (childBottom !== maxBottom)
-                    &&
-                        ((Number.isInteger(childBottom) && Number.isInteger(maxBottom))
-                            ?
-                                (childBottom > maxBottom)
-                            :
-                                ((childBottom - maxBottom) > -0.6))))
+                        (childBottom > maxBottom)))
             return true; // found
         return someOverflowedDescendant(maxRight, maxBottom, child); // nested search
     }))
@@ -115,15 +105,19 @@ export function ResponsiveProvider(props) {
                     (scrollHeight > clientHeight) // vert scrollbar detected
             )
                 return true;
-            const { right: elmRight, bottom: elmBottom } = elm.getBoundingClientRect();
+            //#region handle padding right & bottom
             const { paddingInlineEnd, paddingBlockEnd } = getComputedStyle(elm);
-            const marginRight = (parseNumber(paddingInlineEnd) ?? 0);
-            const marginBottom = (parseNumber(paddingBlockEnd) ?? 0);
-            const maxRight = marginRight ? (elmRight - marginRight) : null;
-            const maxBottom = marginBottom ? (elmBottom - marginBottom) : null;
+            const paddingRight = (parseNumber(paddingInlineEnd) ?? 0);
+            const paddingBottom = (parseNumber(paddingBlockEnd) ?? 0);
+            if ((paddingRight === 0) && (paddingBottom === 0))
+                return false;
+            const { right: elmRight, bottom: elmBottom } = elm.getBoundingClientRect();
+            const maxRight = paddingRight ? Math.round(elmRight - paddingRight) : null;
+            const maxBottom = paddingBottom ? Math.round(elmBottom - paddingBottom) : null;
             if ((maxRight === null) && (maxBottom === null))
                 return false;
             return someOverflowedDescendant(maxRight, maxBottom, elm);
+            //#endregion handle padding right & bottom
         });
         if (hasOverflowed)
             setCurrentFallbackIndex(currentFallbackIndex + 1);
