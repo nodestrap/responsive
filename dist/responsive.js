@@ -23,13 +23,17 @@ export const useResponsiveCurrentFallback = () => {
 };
 // utilities:
 const isOverflowable = (element) => {
-    const { display, overflowX, overflowY, } = getComputedStyle(element);
+    const { display,
+    // overflowX,
+    // overflowY,
+     } = getComputedStyle(element);
     if (display === 'none')
         return false; // hidden element => not overflowable
-    if ((overflowX !== 'visible')
-        &&
-            (overflowY !== 'visible'))
-        return false; // hidden/scroll/clip/overlay/auto/ => not overflowable
+    // if (
+    //     (overflowX !== 'visible')
+    //     &&
+    //     (overflowY !== 'visible')
+    // )                       return false; // hidden/scroll/clip/overlay/auto/ => not overflowable
     return true;
 };
 const hasOverflowedDescendant = (element, minLeft, minTop, maxRight, maxBottom) => {

@@ -1,6 +1,6 @@
 {
   "name": "@nodestrap/responsive",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "A responsive management system for web components.",
   "type": "module",
   "main": "dist/responsive.js",
